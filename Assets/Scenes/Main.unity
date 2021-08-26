@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f10ddea64481d46a31e48fbfcd8b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boidPrefab: {fileID: 1115317992502546106, guid: 440f0af9997e16a4ba440541c7c04bd9, type: 3}
   numBoids: 100
   size: {x: 100, y: 100, z: 100}
 --- !u!4 &1279780614
