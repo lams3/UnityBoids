@@ -3,7 +3,7 @@ using UnityEngine;
 public class BoidSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject boidPrefab;
+    private Boid boidPrefab;
 
     [SerializeField]
     private int numBoids;
@@ -24,6 +24,7 @@ public class BoidSpawner : MonoBehaviour
                 Random.Range(min.z, max.z)
             );
             boid.transform.forward = Random.onUnitSphere;
+            boid.velocity = Random.Range(boid.minSpeed, boid.maxSpeed) * boid.transform.forward;
         }
     }
 
