@@ -3,7 +3,26 @@ using UnityEngine;
 public class BoidSpawner : MonoBehaviour
 {
     [SerializeField]
+    private int numBoids;
+
+    [SerializeField]
     private Vector3 size;
+
+    private void Awake()
+    {
+        Vector3 min = this.transform.position - this.size / 2.0f;
+        Vector3 max = this.transform.position + this.size / 2.0f;
+        for (int i = 0; i < this.numBoids; i++)
+        {
+            var boid = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            boid.transform.position = new Vector3(
+                Random.Range(min.x, max.x),
+                Random.Range(min.y, max.y),
+                Random.Range(min.z, max.z)
+            );
+            boid.transform.forward = Random.onUnitSphere;
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {
