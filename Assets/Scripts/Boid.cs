@@ -6,12 +6,21 @@ public class Boid : MonoBehaviour
 {
     public FlockSettings settings;
 
+    public Transform target;
+
     [HideInInspector]
     public Vector3 velocity;
 
     public void UpdateMotion(List<Boid> flock)
     {
         Vector3 acceleration = Vector3.zero;
+        
+        if (this.target != null)
+        {
+            Vector3 offsetToTarget = this.target.position - this.transform.position;
+            acceleration += SteerTowards(offsetToTarget) * this.settings.targetWeight;
+        }
+
         if (flock.Count > 0)
         {
             Vector3 offsetToFlockCenter = this.GetFlockCenter(flock) - this.transform.position;
@@ -19,7 +28,7 @@ public class Boid : MonoBehaviour
             Vector3 separation = SteerTowards(this.GetAvgAvoidanceHeading(flock)) * this.settings.separationWeight;
             Vector3 alignment = SteerTowards(this.GetAvgFlockHeading(flock)) * this.settings.alignmentWeight;
             Vector3 cohesion = SteerTowards(offsetToFlockCenter) * this.settings.cohesionWeight;
-            acceleration = separation + alignment + cohesion;
+            acceleration += separation + alignment + cohesion;
         }
         
         this.velocity += acceleration * Time.deltaTime;

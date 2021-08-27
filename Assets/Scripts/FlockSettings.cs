@@ -21,4 +21,6 @@ public class FlockSettings : ScriptableObject
     public float cohesionWeight = 1.0f;
     [Range(0, 1)]
     public float separationWeight = 1.0f;
+    [Range(0, 1)]
+    public float targetWeight = 1.0f;
 }

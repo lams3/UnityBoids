@@ -9,6 +9,9 @@ public class BoidSpawner : MonoBehaviour
     private int numBoids;
 
     [SerializeField]
+    private Transform target;
+
+    [SerializeField]
     private Vector3 size;
 
     private void Awake()
@@ -23,8 +26,8 @@ public class BoidSpawner : MonoBehaviour
                 Random.Range(min.y, max.y),
                 Random.Range(min.z, max.z)
             );
-            boid.transform.forward = Random.onUnitSphere;
             boid.velocity = Random.Range(boid.settings.minSpeed, boid.settings.maxSpeed) * boid.transform.forward;
+            boid.target = this.target;
         }
     }
 
