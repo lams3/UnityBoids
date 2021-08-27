@@ -17,6 +17,7 @@ public class BoidManager : MonoBehaviour
             var visibleNeighbors = this.boids.Where(
                 el => Vector3.Distance(boid.transform.position, el.transform.position) <= boid.perceptionRadius
             ).ToList();
+            visibleNeighbors.Remove(boid);
 
             boid.UpdateMotion(visibleNeighbors);
         }

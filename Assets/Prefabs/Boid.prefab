@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963c43e66b5f789479ffcfd39d6e4296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  separationWeight: 1
+  alignmentWeight: 0.6
+  cohesionWeight: 0.2
   minSpeed: 5
   maxSpeed: 10
   perceptionRadius: 7
+  avoidanceRadius: 4
   velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &533780859459944579
 PrefabInstance:
