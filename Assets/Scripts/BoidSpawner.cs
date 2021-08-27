@@ -24,7 +24,7 @@ public class BoidSpawner : MonoBehaviour
                 Random.Range(min.z, max.z)
             );
             boid.transform.forward = Random.onUnitSphere;
-            boid.velocity = Random.Range(boid.minSpeed, boid.maxSpeed) * boid.transform.forward;
+            boid.velocity = Random.Range(boid.settings.minSpeed, boid.settings.maxSpeed) * boid.transform.forward;
         }
     }
 

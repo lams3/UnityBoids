@@ -4,29 +4,7 @@ using UnityEngine;
 
 public class Boid : MonoBehaviour
 {
-    [SerializeField, Range(0, 1)]
-    private float separationWeight = 1.0f;
-
-    [SerializeField, Range(0, 1)]
-    private float alignmentWeight = 1.0f;
-
-    [SerializeField, Range(0, 1)]
-    private float cohesionWeight = 1.0f;
-
-    [Range(0, 10)]
-    public float minSpeed = 1.0f;
-
-    [Range(0, 10)]
-    public float maxSpeed = 4.0f;
-
-    [SerializeField, Range(0, 10)]
-    private float maxSteerForce = 4.0f;
-
-    [Range(0, 10)]
-    public float perceptionRadius = 2.0f;
-
-    [SerializeField, Range(0, 10)]
-    private float avoidanceRadius = 1.0f;
+    public FlockSettings settings;
 
     [HideInInspector]
     public Vector3 velocity;
@@ -38,16 +16,16 @@ public class Boid : MonoBehaviour
         {
             Vector3 offsetToFlockCenter = this.GetFlockCenter(flock) - this.transform.position;
 
-            Vector3 separation = SteerTowards(this.GetAvgAvoidanceHeading(flock)) * this.separationWeight;
-            Vector3 alignment = SteerTowards(this.GetAvgFlockHeading(flock)) * this.alignmentWeight;
-            Vector3 cohesion = SteerTowards(offsetToFlockCenter) * this.cohesionWeight;
+            Vector3 separation = SteerTowards(this.GetAvgAvoidanceHeading(flock)) * this.settings.separationWeight;
+            Vector3 alignment = SteerTowards(this.GetAvgFlockHeading(flock)) * this.settings.alignmentWeight;
+            Vector3 cohesion = SteerTowards(offsetToFlockCenter) * this.settings.cohesionWeight;
             acceleration = separation + alignment + cohesion;
         }
         
         this.velocity += acceleration * Time.deltaTime;
         float speed = this.velocity.magnitude;
         Vector3 dir = this.velocity / speed;
-        speed = Mathf.Clamp(speed, this.minSpeed, this.maxSpeed);
+        speed = Mathf.Clamp(speed, this.settings.minSpeed, this.settings.maxSpeed);
         this.velocity = dir * speed;
 
         this.transform.position += this.velocity * Time.deltaTime;
@@ -72,7 +50,7 @@ public class Boid : MonoBehaviour
         foreach (Boid flockMate in flock)
         {
             Vector3 v = this.transform.position - flockMate.transform.position;
-            if (v.magnitude < this.avoidanceRadius)
+            if (v.magnitude < this.settings.avoidanceRadius)
                 separation += v.normalized / v.sqrMagnitude;
         }
 
@@ -81,16 +59,16 @@ public class Boid : MonoBehaviour
 
     private Vector3 SteerTowards(Vector3 vector)
     {
-        Vector3 v = vector.normalized * this.maxSpeed - this.velocity;
-        return Vector3.ClampMagnitude(v, this.maxSteerForce);
+        Vector3 v = vector.normalized * this.settings.maxSpeed - this.velocity;
+        return Vector3.ClampMagnitude(v, this.settings.maxSteerForce);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1.0f, 1.0f, 0.0f, 0.2f);
-        Gizmos.DrawSphere(this.transform.position, this.perceptionRadius);
+        Gizmos.DrawSphere(this.transform.position, this.settings.perceptionRadius);
 
         Gizmos.color = new Color(1.0f, 0.0f, 0.0f, 0.2f);
-        Gizmos.DrawSphere(this.transform.position, this.avoidanceRadius);
+        Gizmos.DrawSphere(this.transform.position, this.settings.avoidanceRadius);
     }
 }
