@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Boid : MonoBehaviour
@@ -15,9 +16,20 @@ public class Boid : MonoBehaviour
     [HideInInspector]
     public Vector3 velocity;
 
-    private void Update()
+    public void UpdateMotion(List<Boid> visibleNeighbors)
     {
+        Vector3 acceleration = Vector3.zero;
+        
+        if (visibleNeighbors.Count > 0)
+        {
+            Vector3 targetVelocity = visibleNeighbors.Aggregate(Vector3.zero, (acc, el) => acc + el.velocity / visibleNeighbors.Count);
+            acceleration = targetVelocity - this.velocity;
+        }
+
+        this.velocity += acceleration * Time.deltaTime;
         this.transform.position += this.velocity * Time.deltaTime;
+
+        this.transform.forward = this.velocity;
     }
 
     private void OnDrawGizmosSelected()
