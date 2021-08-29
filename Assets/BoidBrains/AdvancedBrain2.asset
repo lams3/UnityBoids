@@ -9,15 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e501b2b90ff1b4ebfddbfb55c29a1c, type: 3}
-  m_Name: DefaultSettings
+  m_Script: {fileID: 11500000, guid: 80f439d849b32e14b8cf67e6709112db, type: 3}
+  m_Name: AdvancedBrain2
   m_EditorClassIdentifier: 
-  minSpeed: 14.4
-  maxSpeed: 22.8
-  perceptionRadius: 21.5
-  avoidanceRadius: 9
-  maxSteerForce: 24.9
-  alignmentWeight: 1
-  cohesionWeight: 0.404
-  separationWeight: 0.509
-  targetWeight: 0
