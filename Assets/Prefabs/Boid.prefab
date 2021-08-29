@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 1f7e66894aea35f45aeb78496b2f4250, type: 2}
+  brain: {fileID: 11400000, guid: 943dfb021b5a1e44da3f69872de0d0a7, type: 2}
+  target: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &533780859459944579
 PrefabInstance:

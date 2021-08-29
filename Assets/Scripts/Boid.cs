@@ -6,6 +6,8 @@ public class Boid : MonoBehaviour
 {
     public FlockSettings settings;
 
+    public DefaultBoidBrain brain;
+
     public Transform target;
 
     [HideInInspector]

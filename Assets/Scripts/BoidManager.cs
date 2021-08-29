@@ -14,12 +14,8 @@ public class BoidManager : MonoBehaviour
     {
         foreach (Boid boid in this.boids)
         {
-            var visibleNeighbors = this.boids.Where(
-                el => Vector3.Distance(boid.transform.position, el.transform.position) <= boid.settings.perceptionRadius
-            ).ToList();
-            visibleNeighbors.Remove(boid);
-
-            boid.UpdateMotion(visibleNeighbors);
+            var flock = boid.brain.FilterFlock(boid, this.boids);
+            boid.UpdateMotion(flock);
         }
     }
 }
