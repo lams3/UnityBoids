@@ -20,4 +20,4 @@ MonoBehaviour:
   alignmentWeight: 1
   cohesionWeight: 0.404
   separationWeight: 0.509
-  targetWeight: 0
+  targetWeight: 1
